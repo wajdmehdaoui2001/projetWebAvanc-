@@ -24,13 +24,27 @@ const errorHandler = (err, req, res, next) => {
                 stackTrace: err.stack
             });
             break;
-        default:
-            res.status(statusCode).json({
-                title: "successed",
-                message: "request successed",
+        case constants.FORBIDDEN:
+            res.status(constants.FORBIDDEN).json({
+                title: "Forbidden",
+                message: err.message,
                 stackTrace: err.stack
             });
             break;
+            case constants.SERVER_ERROR:
+            res.status(constants.SERVER_ERROR).json({
+                title: "Server Error",
+                message: err.message,
+                stackTrace: err.stack
+            });
+            break;
+        default:
+
+         console.log("No error, all good");
+         break;
+
+
+            
     }
 };
 
